@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace csprojectbuilder
 {
@@ -24,16 +23,98 @@ namespace csprojectbuilder
             set { attributes["Title"] = value; }
         }
 
-        public Guid guid { get; private set; }
-
-        public AssemblyInfoCs(string title,Guid AssemblyGuid)
+        public string Description
         {
-            Title = title;
+            get { return attributes["Description"]; }
+            set { attributes["Description"] = value; }
         }
 
-        private static string ItemToString(KeyValuePair<string, string> item)
+        public string Configuration
         {
-            return string.Format("[assembly: Assembly{0}(\"{1}\")]", item.Key, item.Value);
+            get { return attributes["Configuration"]; }
+            set { attributes["Configuration"] = value; }
+        }
+
+        public string Company
+        {
+            get { return attributes["Company"]; }
+            set { attributes["Company"] = value; }
+        }
+
+        public string Product
+        {
+            get { return attributes["Product"]; }
+            set { attributes["Product"] = value; }
+        }
+
+        public string Copyright
+        {
+            get { return attributes["Copyright"]; }
+            set { attributes["Copyright"] = value; }
+        }
+
+        public string Trademark
+        {
+            get { return attributes["Trademark"]; }
+            set { attributes["Trademark"] = value; }
+        }
+
+        public string Culture
+        {
+            get { return attributes["Copyright"]; }
+            set { attributes["Copyright"] = value; }
+        }
+
+        public string Version { get; set; }
+        public string FileVersion { get; set; }
+
+        public Guid Guid { get; private set; }
+
+        public AssemblyInfoCs(string title, Guid AssemblyGuid)
+        {
+            Guid = AssemblyGuid;
+            Title = title;
+            Description = string.Empty;
+            Configuration = string.Empty;
+            Company = string.Empty;
+            Product = title;
+            Copyright = string.Format("Copyright ©  {0}", DateTime.Now.Year);
+            Version = "1.0.0.0";
+            FileVersion = "1.0.0.0";
+        }
+
+        private static string AttributeToString(KeyValuePair<string, string> item)
+        {
+            return AttributeToString(item.Key, item.Value);
+        }
+
+        private static string AttributeToString(string Key, string Value)
+        {
+            return string.Format("[assembly: Assembly{0}(\"{1}\")]", Key, Value);
+        }
+
+        private IEnumerable<string> SpecificLines
+        {
+            get
+            {
+                yield return "[assembly: ComVisible(false)]";
+                yield return string.Format("[assembly: Guid(\"{0}\")]", Guid);
+                yield return AttributeToString("Version", Version);
+                yield return AttributeToString("FileVersion", FileVersion);
+            }
+        }
+
+        public IEnumerable<string> Lines
+        {
+            get
+            {
+                return namespaces.Union(attributes.Select(p => AttributeToString(p))).Union(SpecificLines);
+            }
+        }
+
+        public void SaveToStream(StreamWriter stream)
+        {
+            foreach (string line in Lines) stream.WriteLine(line);
         }
 
         public string this[string key]
