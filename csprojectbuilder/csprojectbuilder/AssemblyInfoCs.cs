@@ -61,8 +61,8 @@ namespace csprojectbuilder
 
         public string Culture
         {
-            get { return attributes["Copyright"]; }
-            set { attributes["Copyright"] = value; }
+            get { return attributes["Culture"]; }
+            set { attributes["Culture"] = value; }
         }
 
         public string Version { get; set; }
@@ -79,6 +79,8 @@ namespace csprojectbuilder
             Company = string.Empty;
             Product = title;
             Copyright = string.Format("Copyright ©  {0}", DateTime.Now.Year);
+            Trademark = string.Empty;
+            Culture = string.Empty;
             Version = "1.0.0.0";
             FileVersion = "1.0.0.0";
         }
