@@ -11,19 +11,20 @@ namespace csprojectbuilder
     {
         private Guid projectGuid;
         private string title;
+        private static readonly XNamespace NameSpace = "http://schemas.microsoft.com/developer/msbuild/2003";
 
         public XDocument Result { get; private set; }
-        private XElement ProjectTag = new XElement("Project");
+        private XElement ProjectTag = new XElement(NameSpace + "Project");
 
         public XMLCreator(string title, Guid projectGuid)
         {
             this.title = title;
             this.projectGuid = projectGuid;
             Result = new XDocument();
-            Result.Add(ProjectTag);
             ProjectTag.Add(new XAttribute("ToolsVersion", "4.0"));
             ProjectTag.Add(new XAttribute("DefaultTargets", "Build"));
-            ProjectTag.Add(new XAttribute("xmlns", "http://schemas.microsoft.com/developer/msbuild/2003");
+
+            Result.Add(ProjectTag);
         }
     }
 }
