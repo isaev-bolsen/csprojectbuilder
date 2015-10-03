@@ -1,8 +1,7 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
+﻿using csprojectbuilder;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csprojectbuilder;
+using System;
+
 namespace AssemblyInfoTest
 {
     [TestClass]

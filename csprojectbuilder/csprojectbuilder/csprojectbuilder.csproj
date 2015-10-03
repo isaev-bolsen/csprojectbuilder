@@ -43,6 +43,8 @@
     <Compile Include="AssemblyInfoCs.cs" />
     <Compile Include="CsProjectBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyGroup.cs" />
+    <Compile Include="Utils.cs" />
     <Compile Include="XMLCreator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
