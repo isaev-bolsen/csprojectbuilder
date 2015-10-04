@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfoCs.cs" />
+    <Compile Include="Configuration.cs" />
     <Compile Include="CsProjectBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyGroup.cs" />
