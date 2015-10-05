@@ -4,10 +4,12 @@ using System.Linq;
 
 namespace csprojectbuilder
 {
-    public class Configuration
+    public class ConfigurationGroup
     {
         public XElement Element { get; private set; }
 
+        private string _Configuration;
+        private string _Platform;
         private XElement _DebugSymbols = new XElement("DebugSymbols") { Value = "true" };
         private XElement _DebugType = new XElement("DebugType");
         private XElement _Optimize = new XElement("Optimize");
@@ -15,6 +17,16 @@ namespace csprojectbuilder
         private XElement _DefineConstants = new XElement("DefineConstants");
         private XElement _ErrorReport = new XElement("ErrorReport") { Value = "prompt" };
         private XElement _WarningLevel = new XElement("WarningLevel");
+
+        public string ConfigurationName
+        {
+            get { return _Configuration; }
+        }
+
+        public string Platform
+        {
+            get { return _Platform; }
+        }
 
         public bool DebugSymbols
         {
@@ -63,8 +75,10 @@ namespace csprojectbuilder
             set { _WarningLevel.Value = value.ToString(); }
         }
 
-        public Configuration(string Configuration, string platform)
+        public ConfigurationGroup(string Configuration, string platform)
         {
+            _Configuration = Configuration;
+            _Platform = platform;
             Element = new XElement(Utils.NameSpace + "PropertyGroup",
                 new XAttribute("Condition", string.Format(" '$(Configuration)|$(Platform)' == '{0}|{1}' ", Configuration, platform)));
 
