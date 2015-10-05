@@ -5,12 +5,12 @@ using System;
 namespace AssemblyInfoTest
 {
     [TestClass]
-    public class XMLCreatorTest
+    public class ProjectGroupTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void ProjectGroupTest1()
         {
-            XMLCreator XMLCR = new XMLCreator("MyAssembly", Guid.Empty);
+            ProjectGroup XMLCR = new ProjectGroup("MyAssembly", Guid.Empty);
 
             string result = XMLCR.Result.ToString();
         }

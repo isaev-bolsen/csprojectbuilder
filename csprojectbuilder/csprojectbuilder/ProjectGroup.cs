@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace csprojectbuilder
 {
-    public class XMLCreator
+    public class ProjectGroup
     {
         private XElement ProjectTag = new XElement(Utils.NameSpace + "Project");
 
@@ -11,9 +11,9 @@ namespace csprojectbuilder
         public PropertyGroup PropertyGroup { get; private set; }
 
 
-        public XMLCreator(string title, Guid projectGuid) : this(title, title, projectGuid) { }
+        public ProjectGroup(string title, Guid projectGuid) : this(title, title, projectGuid) { }
 
-        public XMLCreator(string title, string RootNamespace, Guid projectGuid)
+        public ProjectGroup(string title, string RootNamespace, Guid projectGuid)
         {
             PropertyGroup = new PropertyGroup(title, RootNamespace, projectGuid);
             Result = new XDocument();
