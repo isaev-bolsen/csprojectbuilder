@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace csprojectbuilder
@@ -6,6 +8,11 @@ namespace csprojectbuilder
     public class ProjectGroup
     {
         private XElement ProjectTag = new XElement(Utils.NameSpace + "Project");
+        private List<Configuration> ConfigurationList = new List<Configuration>()
+        {
+            new Configuration("Debug","AnyCPU"),
+            new Configuration("Release","AnyCPU")
+        };
 
         public XDocument Result { get; private set; }
         public PropertyGroup PropertyGroup { get; private set; }
@@ -27,6 +34,7 @@ namespace csprojectbuilder
 
             Result.Add(ProjectTag);
             ProjectTag.Add(PropertyGroup.Element);
+            ProjectTag.Add(ConfigurationList.Select(C => C.Element));
         }
     }
 }
