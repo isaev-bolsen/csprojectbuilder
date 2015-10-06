@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace csprojectbuilder
 {
-    public class PropertyGroup
+    public class MainPropertyGroup
     {
         public XElement Element { get; private set; }
 
@@ -74,7 +74,7 @@ namespace csprojectbuilder
             private set { _TargetFrameworkVersion.Value = value; }
         }
 
-        public PropertyGroup(string AssemblyName, string RootNamespace, Guid ProjectGuid)
+        public MainPropertyGroup(string AssemblyName, string RootNamespace, Guid ProjectGuid)
         {
             Element = new XElement(Utils.NameSpace + "PropertyGroup");
             Element.Add(_Configuration);
