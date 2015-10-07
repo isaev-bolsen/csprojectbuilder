@@ -7,6 +7,8 @@ namespace csprojectbuilder
 {
     public class ProjectGroup
     {
+        private References References = new References();
+
         private List<ConfigurationGroup> ConfigurationList = new List<ConfigurationGroup>()
         {
             new ConfigurationGroup("Debug","AnyCPU"),
@@ -60,6 +62,11 @@ namespace csprojectbuilder
         public void RemoveConfiguration(ConfigurationGroup configuration)
         {
             ConfigurationList.Remove(configuration);
+        }
+
+        public void AddReferences(params string[] namespaces)
+        {
+            foreach (string NS in namespaces) References.AddReference(NS);
         }
     }
 }
