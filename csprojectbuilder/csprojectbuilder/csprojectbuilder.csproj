@@ -45,6 +45,7 @@
     <Compile Include="CsProjectBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyGroup.cs" />
+    <Compile Include="References.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="ProjectGroup.cs" />
   </ItemGroup>
