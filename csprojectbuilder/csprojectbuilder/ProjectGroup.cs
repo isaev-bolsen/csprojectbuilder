@@ -41,6 +41,7 @@ namespace csprojectbuilder
                     );
                 yield return MainPropertyGroup.Element;
                 foreach (var C in ConfigurationList) yield return C.Element;
+                yield return References.Element;
             }
         }
 
