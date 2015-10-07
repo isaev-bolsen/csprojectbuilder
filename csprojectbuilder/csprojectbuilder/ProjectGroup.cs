@@ -8,6 +8,7 @@ namespace csprojectbuilder
     public class ProjectGroup
     {
         private References References = new References();
+        private CompileItems CompileItems = new CompileItems();
 
         private List<ConfigurationGroup> ConfigurationList = new List<ConfigurationGroup>()
         {
@@ -42,6 +43,7 @@ namespace csprojectbuilder
                 yield return MainPropertyGroup.Element;
                 foreach (var C in ConfigurationList) yield return C.Element;
                 yield return References.Element;
+                yield return CompileItems.Element;
             }
         }
 
@@ -68,6 +70,11 @@ namespace csprojectbuilder
         public void AddReferences(params string[] namespaces)
         {
             foreach (string NS in namespaces) References.AddReference(NS);
+        }
+
+        public void AddFiles(params string[] files)
+        {
+            foreach (string file in files) CompileItems.AddFile(file);
         }
     }
 }
