@@ -117,6 +117,7 @@ namespace csprojectbuilder
         public void SaveToStream(StreamWriter stream)
         {
             foreach (string line in Lines) stream.WriteLine(line);
+            stream.Close();
         }
 
         public string this[string key]
