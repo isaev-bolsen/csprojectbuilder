@@ -10,13 +10,13 @@ namespace csprojectbuilder
 
         private string _Configuration;
         private string _Platform;
-        private XElement _DebugSymbols = new XElement("DebugSymbols") { Value = "true" };
-        private XElement _DebugType = new XElement("DebugType");
-        private XElement _Optimize = new XElement("Optimize");
-        private XElement _OutputPath = new XElement("OutputPath");
-        private XElement _DefineConstants = new XElement("DefineConstants");
-        private XElement _ErrorReport = new XElement("ErrorReport") { Value = "prompt" };
-        private XElement _WarningLevel = new XElement("WarningLevel");
+        private XElement _DebugSymbols = new XElement(Utils.NameSpace + "DebugSymbols") { Value = "true" };
+        private XElement _DebugType = new XElement(Utils.NameSpace + "DebugType");
+        private XElement _Optimize = new XElement(Utils.NameSpace + "Optimize");
+        private XElement _OutputPath = new XElement(Utils.NameSpace + "OutputPath");
+        private XElement _DefineConstants = new XElement(Utils.NameSpace + "DefineConstants");
+        private XElement _ErrorReport = new XElement(Utils.NameSpace + "ErrorReport") { Value = "prompt" };
+        private XElement _WarningLevel = new XElement(Utils.NameSpace + "WarningLevel");
 
         public string ConfigurationName
         {
