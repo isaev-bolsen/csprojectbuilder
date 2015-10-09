@@ -31,6 +31,16 @@ namespace csprojectbuilder
             return f.FullName.Substring(WorkingFolder.FullName.Length).Trim('\\');
         }
 
+        public void AddReferences(params string[] namespaces)
+        {
+             CsProj.AddReferences(namespaces);
+        }
+
+        public void AddReference(string reference, FileInfo HintPath)
+        {
+            CsProj.AddReference(reference, CorrectFileName(HintPath));
+        }
+
         public void SaveFiles()
         {
             CsProj.Result.Save(Path.Combine(WorkingFolder.FullName, Title + ".csproj"));

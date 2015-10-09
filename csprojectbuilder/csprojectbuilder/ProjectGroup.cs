@@ -73,6 +73,11 @@ namespace csprojectbuilder
             foreach (string NS in namespaces) References.AddReference(NS);
         }
 
+        public void AddReference(string reference, string HintPath)
+        {
+            References.AddReference(reference, HintPath);
+        }
+
         public void AddFiles(params string[] files)
         {
             foreach (string file in files) CompileItems.AddFile(file);
