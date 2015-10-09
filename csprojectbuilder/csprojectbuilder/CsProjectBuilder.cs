@@ -28,7 +28,7 @@ namespace csprojectbuilder
         private string CorrectFileName(FileInfo f)
         {
             if (!f.FullName.StartsWith(WorkingFolder.FullName)) throw new ArgumentException("I expect files must be located in working folder!");
-            return f.FullName.Substring(WorkingFolder.FullName.Length);
+            return f.FullName.Substring(WorkingFolder.FullName.Length).Trim('\\');
         }
 
         public void SaveFiles()
