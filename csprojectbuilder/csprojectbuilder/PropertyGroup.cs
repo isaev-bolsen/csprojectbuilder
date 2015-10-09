@@ -25,7 +25,7 @@ namespace csprojectbuilder
         private XElement _AssemblyName = new XElement(Utils.NameSpace + "AssemblyName");
         private XElement _TargetFrameworkVersion = new XElement(Utils.NameSpace + "TargetFrameworkVersion")
         {
-            Value = "v4.5"
+            Value = "v4.5.1"
         };
         private XElement _FileAlignment = new XElement(Utils.NameSpace + "FileAlignment")
         {
