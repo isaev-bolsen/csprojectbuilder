@@ -44,7 +44,7 @@ namespace csprojectbuilder
                 foreach (var C in ConfigurationList) yield return C.Element;
                 yield return References.Element;
                 yield return CompileItems.Element;
-                yield return new XElement(Utils.NameSpace + "Import", new XElement("Project", "$(MSBuildToolsPath)\\Microsoft.CSharp.targets"));
+                yield return new XElement(Utils.NameSpace + "Import", new XAttribute("Project", "$(MSBuildToolsPath)\\Microsoft.CSharp.targets"));
             }
         }
 
