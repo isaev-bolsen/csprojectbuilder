@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace csprojectbuilder
 {
@@ -18,12 +20,23 @@ namespace csprojectbuilder
             Title = title;
         }
 
+        public void AddFiles(IEnumerable<FileInfo> files)
+        {
+            CsProj.AddFiles(files.Select(f => CorrectFileName(f)).ToArray());
+        }
+
+        private string CorrectFileName(FileInfo f)
+        {
+            if (!f.FullName.StartsWith(WorkingFolder.FullName)) throw new ArgumentException("I expect files must be located in working folder!");
+            return f.FullName.Substring(WorkingFolder.FullName.Length);
+        }
+
         public void SaveFiles()
         {
             CsProj.Result.Save(Path.Combine(WorkingFolder.FullName, Title + ".csproj"));
             DirectoryInfo PropertiesFolder = new DirectoryInfo(Path.Combine(WorkingFolder.FullName, "Properties"));
-            if(!PropertiesFolder.Exists) PropertiesFolder.Create();
-            FileInfo AssemblyInfoFile=new FileInfo(Path.Combine(PropertiesFolder.FullName,"AssemblyInfo.cs"));
+            if (!PropertiesFolder.Exists) PropertiesFolder.Create();
+            FileInfo AssemblyInfoFile = new FileInfo(Path.Combine(PropertiesFolder.FullName, "AssemblyInfo.cs"));
             AssemblyInfoCs.SaveToStream(AssemblyInfoFile.CreateText());
         }
     }
