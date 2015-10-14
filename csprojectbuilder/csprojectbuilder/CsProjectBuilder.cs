@@ -12,16 +12,23 @@ namespace csprojectbuilder
         public DirectoryInfo WorkingFolder { get; private set; }
         public string Title { get; private set; }
 
+        private DirectoryInfo PropertiesFolder;
+        private FileInfo AssemblyInfoFile;
+
         public CsProjectBuilder(string title, DirectoryInfo workingFolder, Guid projectGuid, Guid AssemblyGuid)
         {
             AssemblyInfoCs = new AssemblyInfoCs(title, AssemblyGuid);
             CsProj = new ProjectGroup(title, projectGuid);
             WorkingFolder = workingFolder;
             Title = title;
+
+             PropertiesFolder = new DirectoryInfo(Path.Combine(WorkingFolder.FullName, "Properties"));
+             AssemblyInfoFile = new FileInfo(Path.Combine(PropertiesFolder.FullName, "AssemblyInfo.cs"));
         }
 
         public void AddFiles(IEnumerable<FileInfo> files)
         {
+            SaveAssInfo();
             CsProj.AddFiles(files.Select(f => CorrectFileName(f)).ToArray());
         }
 
@@ -33,7 +40,7 @@ namespace csprojectbuilder
 
         public void AddReferences(params string[] namespaces)
         {
-             CsProj.AddReferences(namespaces);
+            CsProj.AddReferences(namespaces);
         }
 
         public void AddReference(string reference, FileInfo HintPath)
@@ -43,10 +50,13 @@ namespace csprojectbuilder
 
         public void SaveFiles()
         {
+            SaveAssInfo();
             CsProj.Result.Save(Path.Combine(WorkingFolder.FullName, Title + ".csproj"));
-            DirectoryInfo PropertiesFolder = new DirectoryInfo(Path.Combine(WorkingFolder.FullName, "Properties"));
+        }
+
+        private void SaveAssInfo()
+        {
             if (!PropertiesFolder.Exists) PropertiesFolder.Create();
-            FileInfo AssemblyInfoFile = new FileInfo(Path.Combine(PropertiesFolder.FullName, "AssemblyInfo.cs"));
             AssemblyInfoCs.SaveToStream(AssemblyInfoFile.CreateText());
         }
     }
