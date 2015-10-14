@@ -88,7 +88,7 @@ namespace csprojectbuilder
             Element.Add(_DebugType);
             Optimize = !isDebug;
             Element.Add(_Optimize);
-            OutputPath = string.Format(@"\bin\{0}\", Configuration);
+            OutputPath = string.Format(@"bin\{0}\", Configuration);
             Element.Add(_OutputPath);
             DefineConstants = isDebug ? "DEBUG;TRACE" : "TRACE";
             Element.Add(_DefineConstants);
